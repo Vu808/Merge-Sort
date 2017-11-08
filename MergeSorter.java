@@ -1,7 +1,6 @@
-
 public class MergeSorter {
 	
-	private static int[] temp;
+	
 	
 	public static void mergeSort(int[] list, int lo,  int hi) {
 		if (lo < hi) {
@@ -14,28 +13,32 @@ public class MergeSorter {
 	}
 	
 	public static void merge(int[] list, int lo, int mid, int hi) {
-		for (int i = lo; i <= hi; i++) {
-			temp[i] = list[i];
-		}
-		int i = lo;
-		int j = mid+1;
-		int k = hi;
+		 int[] temp = new int[hi+1];
 		
-		while (i<=mid && j <= hi) {
-			if (temp[i] <= temp[j]) {
-				list[k] = temp[i];
-				i++;
-			} else { 
-				list[k] = temp[j];
-				j++;
+		System.arraycopy(list, 0, temp, 0, hi+1);
+		int x = lo;	
+		int y= mid+1;
+			int z= lo;
+			while (x <= mid && y <= hi) {
+				if (temp[x] < temp[y]) {
+					list[z] = temp[x];
+					x++;
+					z++;
+				} else {
+					list[z] = temp[y];
+					y++;
+					z++;
+				}
+			
+				
+				
 			}
-			k++;
+			while (x<=mid) {
+				list[z] = temp[x];
+				z++;
+				x++;
+			}
 		}
-		while (i<= mid) {
-			list[k] = temp[i];
-			k++;
-			i++;
-		}
+	
 	}
 	
-}
